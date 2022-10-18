@@ -2,14 +2,11 @@
 
 Contact::Contact()
 {
-    std::cout << "CONTACT CREATED";
-    std::cout << std::endl;
     return ;
 }
+
 Contact::~Contact()
 {
-    std::cout << "CONTACT REMOVED";
-    std::cout << std::endl;
     return ;
 }
 

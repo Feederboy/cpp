@@ -7,14 +7,12 @@ int main()
     std::string res;
     int i = 0;
     
-    std::cout << "PROMPT" << std::endl;
     std::cout << "type ADD, SEARCH or EXIT: " << std::endl;
     std::getline(std::cin, res);
     while (std::cin)
     {
         if (res.compare("ADD") == 0)
         {
-            std::cout << "ADD TYPED" << std::endl;
             i++;
             book.delete_older();
             book.setcontact();

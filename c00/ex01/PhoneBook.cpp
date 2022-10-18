@@ -6,7 +6,7 @@
 /*   By: matt <matt@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 09:18:09 by matt              #+#    #+#             */
-/*   Updated: 2022/10/18 11:31:59 by matt             ###   ########.fr       */
+/*   Updated: 2022/10/18 11:49:26 by matt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,18 @@
 
 PhoneBook::PhoneBook()
 {
-    std::cout << "PHONEBOOK CREATED" << std::endl;
     return ;
 }
 
 PhoneBook::~PhoneBook()
 {
-    std::cout << "PHONEBOOK DELETED" << std::endl;
     return ;
 }
 
 void    PhoneBook::delete_older()
 {
     for (int i = 0; i < 7; i++)
-    {
-        std::cout << "i = " << i << std::endl;
         this->_list[i] = this->_list[i + 1];
-    }
-    std::cout << "oldest user deleted " << std::endl;
 }
 
 void    PhoneBook::setcontact()
