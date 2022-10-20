@@ -18,6 +18,6 @@ void    HumanB::set_weapon(Weapon &weapon)
 
 void    HumanB::attack()
 {
-    std::cout << this->_name << "attacks with their bare hands" << std::endl;
-
+    std::cout << this->_name << "attacks with their " << this->_weapon->getType() << std::endl;
+    return ;
 }

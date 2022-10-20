@@ -1,9 +1,7 @@
 NAME			=	Brainz
 
 SRC				=	main.cpp    \
-					HumanA.cpp  \
-					HumanB.cpp	\
-					Weapon.cpp  \
+					Harl.cpp
 
 
 OBJ				=	$(SRC: .cpp=.o)
