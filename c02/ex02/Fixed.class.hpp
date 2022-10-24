@@ -24,7 +24,31 @@ class Fixed
         void    setRawBits(int const v);
         float   toFloat() const;
         int        toInt() const;
-        
+
+
+        static Fixed &      min(Fixed &lhs, Fixed &rhs);
+        static Fixed &      max(Fixed &lhs, Fixed &rhs);
+        static const Fixed &      min(const Fixed &lhs, const Fixed &rhs);
+        static const Fixed &      max(const Fixed &lhs, const Fixed &rhs);
+
+        bool    operator>(Fixed const &rhs) const;
+        bool    operator<(Fixed const &rhs) const;
+        bool    operator>=(Fixed const &rhs) const;
+        bool    operator<=(Fixed const &rhs) const;
+        bool    operator==(Fixed const &rhs) const;
+        bool    operator!=(Fixed const &rhs) const;
+
+        Fixed   operator*(Fixed const &rhs);
+        Fixed   operator+(Fixed const &rhs);
+        Fixed   operator-(Fixed const &rhs);
+        Fixed   operator/(Fixed const &rhs);
+
+        Fixed   operator++();
+        Fixed   operator++(int);
+        Fixed   operator--();
+        Fixed   operator--(int);
+
+
 };
 
 std::ostream & operator<<(std::ostream &o, Fixed const &rhs);
