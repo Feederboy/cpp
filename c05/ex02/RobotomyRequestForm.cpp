@@ -1,0 +1,75 @@
+#include "RobotomyRequestForm.hpp"
+
+RobotomyRequestForm::RobotomyRequestForm(std::string target) : Form("RobotomyRequestForm", 137 , 145)
+, _gradeEx(45), _gradeSign(72), _name("RobotomyRequestForm"), _target(target)
+{
+	this->_signed = false;
+	if (_gradeEx < 1 || _gradeSign < 1)
+		throw RobotomyRequestForm::GradeTooHighException();
+	else if (_gradeEx > 150 || _gradeSign > 150)
+		throw RobotomyRequestForm::GradeTooLowException();
+}
+
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &cpy) : Form(cpy.getName(), cpy.getGradeEx()
+	, cpy.getGradeS()), _gradeEx(cpy.getGradeEx()), _gradeSign(cpy.getGradeS()), _name(cpy.getName()), _target(cpy.getTarget())
+{
+	*this = cpy;
+}
+
+RobotomyRequestForm::~RobotomyRequestForm()
+{
+
+}
+
+const RobotomyRequestForm &RobotomyRequestForm::operator=(const RobotomyRequestForm &rhs)
+{
+	this->_signed = rhs.getIsSigned();
+	return *this;
+}
+
+const std::string	RobotomyRequestForm::getName(void) const
+{
+	return this->_name;
+}
+
+const std::string	RobotomyRequestForm::getTarget(void) const
+{
+	return this->_target;
+}
+
+int			RobotomyRequestForm::getGradeEx(void) const
+{
+	return this->_gradeEx;
+}
+
+int			RobotomyRequestForm::getGradeS(void) const
+{
+	return this->_gradeSign;
+}
+
+bool		RobotomyRequestForm::getIsSigned(void) const
+{
+	return this->_signed;
+}
+
+std::ostream &	operator<<(std::ostream &o, RobotomyRequestForm const &rhs)
+{
+	o << rhs.getName() << ", signing grade " 
+		<< rhs.getGradeS() << ", execution grade " << rhs.getGradeEx();
+	if (rhs.getIsSigned())
+		o << " [signed]";
+	else
+		o << " [not signed]";
+	return o;
+}
+
+void            RobotomyRequestForm::execute(Bureaucrat const &executor) const
+{
+    std::string	name = "_shrubbery";
+
+	if (canBeExecuted(executor, *this))
+	{
+		
+	}
+
+}
