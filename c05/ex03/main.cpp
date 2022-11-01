@@ -2,6 +2,7 @@
 #include "ShrubberyCreationForm.hpp"
 # include "RobotomyRequestForm.hpp"
 # include "PresidentialPardonForm.hpp"
+# include "Intern.hpp"
 
 int	main()
 {
@@ -68,5 +69,35 @@ int	main()
 	
 	///////////////////////////////////////////////////////////////
 
+	Intern			randomOne;
+	Form			*rf_1;
+	Form			*rf_2;
+	Form			*rf_3;
+	Form			*rf_4;
+	std::string		nameTest_1 = "robotomy test";
+	std::string		nameTest_2 = "presidential test";
+	std::string		nameTest_3 = "shrubbery test";
+	std::string		nameTest_4 = "shr test";
+	
+
+	
+	///////////////////////////////////////////////////////////////
+	
+	std::cout << "----INTERN FORM's CREATION----" << std::endl << std::endl;
+
+	rf_1 = randomOne.makeForm(nameTest_1, target3);
+	rf_2 = randomOne.makeForm(nameTest_2, target4);
+	rf_3 = randomOne.makeForm(nameTest_3, target1);
+	rf_4 = randomOne.makeForm(nameTest_4, target2);
+	std::cout << std::endl;
+	
+	std::cout << rf_1 << std::endl;
+	std::cout << std::endl;
+	std::cout << rf_2 << std::endl;
+	std::cout << std::endl;
+	std::cout << rf_3 << std::endl;
+	std::cout << std::endl;
+	std::cout << rf_4 << std::endl;
+	
 	return (0);
 }

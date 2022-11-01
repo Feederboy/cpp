@@ -1,11 +1,9 @@
-#ifndef ROBOTOMYREQUESTFORM_HPP
-#define ROBOTOMYREQUESTFORM_HPP
-
+#ifndef SHRUBBERYCREATIONFORM_HPP
+#define SHRUBBERYCREATIONFORM_HPP
 #include "Bureaucrat.hpp"
 # include <fstream>
-#include <ctime>
 
-class RobotomyRequestForm: public virtual Form
+class ShrubberyCreationForm: public virtual Form
 {
     private :
 		const int		    _gradeEx;
@@ -15,16 +13,16 @@ class RobotomyRequestForm: public virtual Form
 		bool			    _signed;
 
     public:
-        RobotomyRequestForm(std::string target);
-		RobotomyRequestForm(const RobotomyRequestForm &cpy);
-		virtual	~RobotomyRequestForm();
+        ShrubberyCreationForm(std::string target);
+		ShrubberyCreationForm(const ShrubberyCreationForm &cpy);
+		virtual	~ShrubberyCreationForm();
 
-		const RobotomyRequestForm	&operator=(const RobotomyRequestForm &cpy);
+		const ShrubberyCreationForm	&operator=(const ShrubberyCreationForm &cpy);
 		
 		//methods
 		void	execute(Bureaucrat const &executor) const;
 		//functions
-		RobotomyRequestForm	&beSigned(const Bureaucrat &b);
+		ShrubberyCreationForm	&beSigned(const Bureaucrat &b);
 		//getters
 		const std::string	getName(void) const;
 		int		getGradeEx(void) const;
@@ -56,7 +54,7 @@ class RobotomyRequestForm: public virtual Form
 
 };
 
-std::ostream	&operator<<(std::ostream &o, const RobotomyRequestForm &rhs);
+std::ostream	&operator<<(std::ostream &o, const ShrubberyCreationForm &rhs);
 
 
 #endif

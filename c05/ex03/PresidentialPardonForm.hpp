@@ -1,11 +1,11 @@
-#ifndef ROBOTOMYREQUESTFORM_HPP
-#define ROBOTOMYREQUESTFORM_HPP
+#ifndef PRESIDENTIALPARDONFORM_HPP
+#define PRESIDENTIALPARDONFORM_HPP
 
 #include "Bureaucrat.hpp"
 # include <fstream>
 #include <ctime>
 
-class RobotomyRequestForm: public virtual Form
+class PresidentialPardonForm: public virtual Form
 {
     private :
 		const int		    _gradeEx;
@@ -15,16 +15,16 @@ class RobotomyRequestForm: public virtual Form
 		bool			    _signed;
 
     public:
-        RobotomyRequestForm(std::string target);
-		RobotomyRequestForm(const RobotomyRequestForm &cpy);
-		virtual	~RobotomyRequestForm();
+        PresidentialPardonForm(std::string target);
+		PresidentialPardonForm(const PresidentialPardonForm &cpy);
+		virtual	~PresidentialPardonForm();
 
-		const RobotomyRequestForm	&operator=(const RobotomyRequestForm &cpy);
+		const PresidentialPardonForm	&operator=(const PresidentialPardonForm &cpy);
 		
 		//methods
 		void	execute(Bureaucrat const &executor) const;
 		//functions
-		RobotomyRequestForm	&beSigned(const Bureaucrat &b);
+		PresidentialPardonForm	&beSigned(const Bureaucrat &b);
 		//getters
 		const std::string	getName(void) const;
 		int		getGradeEx(void) const;
@@ -56,7 +56,7 @@ class RobotomyRequestForm: public virtual Form
 
 };
 
-std::ostream	&operator<<(std::ostream &o, const RobotomyRequestForm &rhs);
+std::ostream	&operator<<(std::ostream &o, const PresidentialPardonForm &rhs);
 
 
 #endif
