@@ -21,7 +21,7 @@ class Convert
     public:
         //construct
         Convert();
-        Convert(std::string name, int grade);
+        Convert(char *str);
         ~Convert();
         Convert(Convert const &cpy);
         Convert const &operator=(Convert const &rhs);
@@ -31,6 +31,25 @@ class Convert
         char get_char() const;
         double get_double() const;
         float get_float() const;
+
+    //exception
+        class	NonDisplayableException : public std::exception
+	{
+		public :
+			virtual const char	*what() const throw()
+			{
+				return ("Not displayable");
+			}
+	};
+
+      class	ImpossibleException : public std::exception
+	{
+		public :
+			virtual const char	*what() const throw()
+			{
+				return ("Impossible");
+			}
+	};
 
         //Convert
 

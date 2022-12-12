@@ -1,6 +1,7 @@
 NAME			=	Brainz
 
 SRC				=	main.cpp    \
+					Convert.cpp
 					
 OBJ				=	$(SRC: .cpp=.o)
 
