@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PhoneBook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matt <matt@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: maquentr <maquentr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 09:18:09 by matt              #+#    #+#             */
-/*   Updated: 2022/10/18 11:54:48 by matt             ###   ########.fr       */
+/*   Updated: 2022/12/14 12:36:42 by maquentr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ void    PhoneBook::print_book()
 	for(int i = 0; i < 8; i++)
 	{
 		std::cout << "\t| " << i + 1 << " ";
-		std::cout << "|" << std::setw(10) << std::right << this->_list[i].get_firstname(); 
-		std::cout << "|" << std::setw(10) << std::right << this->_list[i].get_lastname(); 
-		std::cout << "|" << std::setw(10) << std::right << this->_list[i].get_nickname(); 
+		std::cout << "|" << std::setw(10) << std::right << this->_list[i].troncate_firstname(); 
+		std::cout << "|" << std::setw(10) << std::right << this->_list[i].troncate_lastname(); 
+		std::cout << "|" << std::setw(10) << std::right << this->_list[i].troncate_nickname(); 
 		std::cout << "|" << std::endl;
 		std::cout << "\t ";
 		std::cout << std::string(36, '-') << std::endl;  

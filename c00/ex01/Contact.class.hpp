@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Contact.class.hpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matt <matt@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: maquentr <maquentr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 17:38:36 by matt              #+#    #+#             */
-/*   Updated: 2022/10/18 10:37:02 by matt             ###   ########.fr       */
+/*   Updated: 2022/12/14 12:38:55 by maquentr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ class Contact
         std::string _darkestsecret;
 
         void				set_firstname();
-		void				set_lastname();
-		void				set_nickname();
-		void				set_phonenumber();
-		void				set_darkestsecret();
+		    void				set_lastname();
+		    void				set_nickname();
+	    	void				set_phonenumber();
+	    	void				set_darkestsecret();
 
     public:
         Contact();

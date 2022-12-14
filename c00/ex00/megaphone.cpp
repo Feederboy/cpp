@@ -15,7 +15,7 @@ int main(int ac, char **av)
     }
     else
     {
-        std::cout << "* LOUD BACKGROUND NOISE *";
+        std::cout << "* LOUD AND UNBEARABLE BACKGROUND NOISE *";
         std::cout << std::endl;
     }
     return (0);
