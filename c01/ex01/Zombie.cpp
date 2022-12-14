@@ -2,8 +2,8 @@
 
 Zombie::Zombie(std::string name)
 {
-    std::cout << "ZOMBIE CREATED" << std::endl;
     this->_name = name;
+    std::cout << "ZOMBIE CREATED " << this->_name << std::endl;
     return ;
 }
 
@@ -15,7 +15,7 @@ Zombie::Zombie()
 
 Zombie::~Zombie()
 {
-    std::cout << "ZOMBIE DELETED" << std::endl;
+    std::cout << "ZOMBIE DELETED " << this->_name << std::endl;
     return ;
 }
 
