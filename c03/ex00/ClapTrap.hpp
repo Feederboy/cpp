@@ -8,7 +8,7 @@
 #include <math.h>
 
 class ClapTrap{
-    protected:
+    private:
         std::string _name;
         int         _hitpoints;
         int         _energypoints;
