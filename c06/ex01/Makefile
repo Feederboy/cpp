@@ -1,9 +1,7 @@
 NAME			=	Brainz
 
 SRC				=	main.cpp    \
-					ClapTrap.cpp \
 					
-
 
 OBJ				=	$(SRC: .cpp=.o)
 
