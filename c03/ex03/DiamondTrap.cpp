@@ -37,5 +37,5 @@ DiamondTrap & DiamondTrap::operator=(DiamondTrap const &rhs)
 
 void        DiamondTrap::whoAmI()
 {
-    std::cout << "I am " << this->_name << "built from " << ClapTrap::_name << std::endl;
+    std::cout << "I am " << this->_name << " built from " << ClapTrap::_name << std::endl;
 }

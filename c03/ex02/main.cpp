@@ -3,15 +3,15 @@
 
 int	main()
 {
-	ClapTrap clap("clap");
-	ScavTrap scav("scav");
+	// ClapTrap clap("clap");
+	// ScavTrap scav("scav");
 	FragTrap frag("frag");
 
 	frag.highFivesGuys();
-	scav.attack("someone");
-	scav.beRepaired(3);
-	scav.takeDamage(2);
-	clap.attack("someoneelse");
-	clap.beRepaired(4);
-	clap.takeDamage(2);
+	// scav.attack("someone");
+	// scav.beRepaired(3);
+	// scav.takeDamage(2);
+	// clap.attack("someoneelse");
+	// clap.beRepaired(4);
+	// clap.takeDamage(2);
 }
