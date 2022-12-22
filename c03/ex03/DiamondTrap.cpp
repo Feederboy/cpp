@@ -10,11 +10,15 @@ DiamondTrap::DiamondTrap(std::string name): ClapTrap(name), FragTrap(name), Scav
     return ;
 }
 
-//DiamondTrap::DiamondTrap(DiamondTrap const &cpy): DiamondTrap(cpy)
-//{
-  //  std::cout << "DiamondTrap Copy constructor called" << std::endl;
-   // return ;
-//}
+DiamondTrap::DiamondTrap(DiamondTrap const &cpy) : ClapTrap(cpy), FragTrap(cpy), ScavTrap(cpy)
+{
+    this->_hitpoints = cpy._hitpoints;
+    this->_energypoints = cpy._energypoints;
+    this->_attackdamage = cpy._attackdamage;
+    this->_name = cpy._name;
+   std::cout << "DiamondTrap Copy constructor called" << std::endl;
+   return ;
+}
 
 DiamondTrap::~DiamondTrap()
 {

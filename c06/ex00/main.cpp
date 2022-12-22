@@ -10,6 +10,8 @@ int main(int ac, char **av)
     else
     {
         Convert *c = new Convert(av[1]);
+        (void)c;
+        return 0;
     }
 
 }

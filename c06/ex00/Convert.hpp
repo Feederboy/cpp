@@ -9,6 +9,11 @@
 # include <stdlib.h>
 # include <limits>
 
+# define CHAR 1
+# define INT 2
+# define DOUBLE 3
+# define FLOAT 4
+
 class Convert
 {
     private:
@@ -16,7 +21,8 @@ class Convert
         char c;
         double d;
         float f;
-        char *base;
+        char *tmp;
+        int type;
 
     public:
         //construct
@@ -31,6 +37,7 @@ class Convert
         char get_char() const;
         double get_double() const;
         float get_float() const;
+        int getType(std::string str);
 
     //exception
         class	NonDisplayableException : public std::exception

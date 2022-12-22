@@ -6,9 +6,11 @@ Convert::Convert()
 {
 }
 
-Convert::Convert(char *str) : base(str)
+Convert::Convert(char *str) : tmp(str)
 {
- //a completer
+    std::string arg(tmp);
+    this->type = this->getType(arg);
+    std::cout << "type = " << this->type << std::endl;
 }
 
 Convert::~Convert()
@@ -63,3 +65,23 @@ float	Convert::get_float() const
 	return this->f;
 }
 
+int     Convert::getType(std::string str)
+{
+    if ((str.length() == 1) &&
+		(std::isprint(static_cast<int>(str[0]))) &&
+		!(std::isdigit(static_cast<int>(str[0]))))
+	{
+		return (CHAR);
+	}
+	else if ((str.find(".") != std::string::npos) ||
+			(str.find("nan") != std::string::npos) ||
+			(str.find("inf") != std::string::npos))
+	{
+		if ((*(str.end() - 1) == 'f') && (*(str.end() - 2) != 'n'))
+		{
+			return (FLOAT);
+		}
+		return (DOUBLE);
+	}
+	return (INT);
+}
