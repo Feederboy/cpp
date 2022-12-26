@@ -13,6 +13,7 @@
 class DiamondTrap : public FragTrap, public ScavTrap{
 
     public:
+        DiamondTrap();
         DiamondTrap(std::string name);
         ~DiamondTrap();
         DiamondTrap(DiamondTrap const &cpy);

@@ -1,5 +1,15 @@
 #include "ScavTrap.hpp"
 
+ScavTrap::ScavTrap(): ClapTrap()
+{
+    this->_hitpoints = 100;
+    this->_energypoints = 50;
+    this->_attackdamage = 20;
+    this->_gatekeeper = false;
+    std::cout << "Scav Constructor called for -no name assigned-" << std::endl;
+    return ;
+}
+
 ScavTrap::ScavTrap(std::string name): ClapTrap(name)
 {
     this->_hitpoints = 100;
@@ -18,7 +28,7 @@ ScavTrap::ScavTrap(ScavTrap const &cpy): ClapTrap(cpy)
 
 ScavTrap::~ScavTrap()
 {
-    std::cout << "Scav Destructor called for " << this->_name << std::endl;
+    std::cout << "Scav Destructor called" << std::endl;
     return ;
 }
 

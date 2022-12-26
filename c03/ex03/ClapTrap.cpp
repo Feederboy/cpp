@@ -1,5 +1,11 @@
 #include "ClapTrap.hpp"
 
+ClapTrap::ClapTrap()
+{
+    std::cout << "Constructor called for -no name assigned- " << std::endl;
+    return ;
+}
+
 ClapTrap::ClapTrap(std::string name):
 _name(name), _hitpoints(10), _energypoints(10), _attackdamage(0)
 {
@@ -16,7 +22,7 @@ _name(cpy._name), _hitpoints(cpy._hitpoints), _energypoints(cpy._energypoints), 
 
 ClapTrap::~ClapTrap()
 {
-    std::cout << "Destructor called for " << this->_name << std::endl;
+    std::cout << "Destructor called " << std::endl;
     return ;
 }
 

@@ -11,6 +11,19 @@ Convert::Convert(char *str) : tmp(str)
     std::string arg(tmp);
     this->type = this->getType(arg);
     std::cout << "type = " << this->type << std::endl;
+    if (this->type == 1)
+    {
+        this->c = tmp[0];
+        this->convert_char(c);
+    }
+    else if (this->type == 2)
+        this->d = static_cast<int>(std::atof(str));
+    else if (this->type == 3)
+        this->d = static_cast<double>(std::atof(str));
+    else if (this->type == 4)
+        this->d = std::atof(str);
+
+    return ;
 }
 
 Convert::~Convert()
@@ -85,3 +98,4 @@ int     Convert::getType(std::string str)
 	}
 	return (INT);
 }
+

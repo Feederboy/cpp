@@ -11,6 +11,7 @@
 class FragTrap : virtual public ClapTrap{
 
     public:
+        FragTrap();
         FragTrap(std::string name);
         ~FragTrap();
         FragTrap(FragTrap const &cpy);

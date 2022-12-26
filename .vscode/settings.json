@@ -67,6 +67,9 @@
         "random": "cpp",
         "fstream": "cpp",
         "numbers": "cpp",
-        "ranges": "cpp"
+        "ranges": "cpp",
+        "complex": "cpp",
+        "span": "cpp",
+        "cinttypes": "cpp"
     }
 }

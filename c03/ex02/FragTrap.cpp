@@ -1,5 +1,14 @@
 #include "FragTrap.hpp"
 
+FragTrap::FragTrap()
+{
+    this->_hitpoints = 100;
+    this->_energypoints = 50;
+    this->_attackdamage = 20;
+    std::cout << "Frag Constructor called for -no name assigned- " << std::endl;
+    return ;
+}
+
 FragTrap::FragTrap(std::string name): ClapTrap(name)
 {
     this->_hitpoints = 100;
@@ -17,7 +26,7 @@ FragTrap::FragTrap(FragTrap const &cpy): ClapTrap(cpy)
 
 FragTrap::~FragTrap()
 {
-    std::cout << "Frag Destructor called for " << this->_name << std::endl;
+    std::cout << "Frag Destructor called" << std::endl;
     return ;
 }
 

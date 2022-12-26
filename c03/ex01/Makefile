@@ -7,17 +7,17 @@ SRC				=	main.cpp    \
 
 OBJ				=	$(SRC: .cpp=.o)
 
-FLAG			=	-Wall -Wextra -Werror -std=c++98
+CXXFLAGS			=	-Wall -Wextra -Werror -std=c++98
 
-CC				=	c++
+CCXX				=	c++
 
 all:	$(NAME)
 
 .cpp.o:
-	$(CC) $(FLAG) $(SRC) -c $< -o $@
+	$(CCXX) $(CXXFLAGS) $(SRC) -c $< -o $@
 
 $(NAME):	$(OBJ)
-	$(CC) $(FLAG) $(OBJ) -o $(NAME)
+	$(CCXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
 clean:
 	/bin/rm -rf *o
