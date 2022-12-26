@@ -9,9 +9,11 @@ int	main()
 	FragTrap frag("frag");
 	DiamondTrap	diam("diam");
 
+	std::cout << std::endl;
 
 
 	diam.whoAmI();
+	diam.attack("Joe");
 	diam.highFivesGuys();
 	diam.guardGate();
 	diam.beRepaired(2);
