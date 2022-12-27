@@ -10,8 +10,10 @@ int main(int ac, char **av)
     else
     {
         Convert *c = new Convert(av[1]);
-        (void)c;
-        return 0;
+        c->aff_char();
+        c->aff_int();
+        c->aff_double();
+        return 0;    
     }
 
 }

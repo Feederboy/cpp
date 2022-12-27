@@ -9,19 +9,21 @@ Convert::Convert()
 Convert::Convert(char *str) : tmp(str)
 {
     std::string arg(tmp);
+    impossible = false;
     this->type = this->getType(arg);
     std::cout << "type = " << this->type << std::endl;
     if (this->type == 1)
     {
-        this->c = tmp[0];
-        
+        this->d = static_cast<double>(std::atof(tmp));
     }
     else if (this->type == 2)
         this->d = static_cast<int>(std::atof(str));
     else if (this->type == 3)
-        this->d = static_cast<double>(std::atof(str));
+        this->d = to_double(str);
     else if (this->type == 4)
         this->d = std::atof(str);
+    else if (this->type == 5)
+        impossible = true;
 
     return ;
 }
@@ -84,8 +86,8 @@ int     Convert::getType(std::string str) const
 		!(std::isdigit(static_cast<int>(str[0]))))
 	{
 		return (CHAR);
-	}
-    else if (strDigit(str))
+	}  //POUR NAN ON RECUP UNE ERREUR
+    else if (strDigit(str)) //FAUT TROUVER NAN OU NANF OU INF UNIQUEMENT DANS STR POUR PAS RECUP UNE ERROR
     {
 	    if ((str.find(".") != std::string::npos) ||
 			(str.find("nan") != std::string::npos) ||
@@ -97,6 +99,11 @@ int     Convert::getType(std::string str) const
 	    	}
 		    return (DOUBLE);
 	    }
+        if (std::atof(str.c_str()) > std::numeric_limits<int>::max() 
+        || std::atof(str.c_str()) < std::numeric_limits<int>::min())
+        {
+            return (ERROR);
+        }
 	    return (INT);
     }
     return (ERROR);
@@ -117,15 +124,12 @@ bool      Convert::strDigit(std::string str) const
             point = true;
         else if (!std::isdigit(str[i]) && (str[i] != '.' || point))
         {
-            std::cout << "STR[i] = " << str[i] << std::endl;
             break;
         }        
         i++;
     }
-    std::cout << "STRSIZE = " << str.size() << " i = " << i << " str[i] = " << str[i] << std::endl;
     if (str.size() == i + 1  && str[i] == 'f')
     {
-        std::cout << "LAST = " << str[i] << std::endl;
         return true;
     }
     else if (str.size() == i)
@@ -133,4 +137,75 @@ bool      Convert::strDigit(std::string str) const
     return false;
 }
 
-//convert
+
+void    Convert::aff_char()
+{
+    std::cout << "char: ";
+    try
+    {
+        if (this->impossible)
+            throw Convert::ImpossibleException();            
+        if (d <= std::numeric_limits<char>::max() && d >= std::numeric_limits<char>::min())
+            this->c = static_cast<char>(this->d);
+        else
+            throw Convert::ImpossibleException();            
+        if (std::isprint(c))
+            std::cout << c << std::endl;
+        else
+            throw Convert::NonDisplayableException();
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+}
+
+void    Convert::aff_int()
+{
+    std::cout << "int: ";
+    try
+    {
+        if (this->impossible)
+            throw Convert::ImpossibleException();      
+        this->i = static_cast<int>(this->d);
+        std::cout << this->i << std::endl;
+    }           
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+}
+
+double  Convert::to_double(char *str)
+{
+    if (!strcmp(str, "nan") || !strcmp(str, "nanf"))
+    {
+        this->d = std::numeric_limits<double>::quiet_NaN();
+    }
+    else if (!strcmp(str, "+inf") || !strcmp(str, "+inff"))
+    {
+        this->d = std::numeric_limits<double>::infinity();
+    }
+    else if (!strcmp(str, "-inf") || !strcmp(str, "-inff"))
+    {
+        this->d = -std::numeric_limits<double>::infinity();
+    }
+    else if (!this->impossible)
+        this->d = static_cast<double>(atof(str));
+    return (this->d);
+}
+
+void    Convert::aff_double()
+{
+    std::cout << "double: ";
+    try
+    {
+        if (this->impossible)
+            throw Convert::ImpossibleException();
+        std::cout << this->d << std::endl;
+    }           
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+}

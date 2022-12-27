@@ -24,6 +24,7 @@ class Convert
         float f;
         char *tmp;
         int type;
+        bool impossible;
 
     public:
         //construct
@@ -61,6 +62,10 @@ class Convert
 	};
 
         //Convert
+        void    aff_char();
+        void    aff_int();
+        double  to_double(char *str);
+        void    aff_double();
         
 
 
