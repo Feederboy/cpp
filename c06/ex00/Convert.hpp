@@ -13,6 +13,7 @@
 # define INT 2
 # define DOUBLE 3
 # define FLOAT 4
+# define ERROR 5
 
 class Convert
 {
@@ -37,7 +38,8 @@ class Convert
         char get_char() const;
         double get_double() const;
         float get_float() const;
-        int getType(std::string str);
+        int getType(std::string str) const;
+        bool    strDigit(std::string str) const;
 
     //exception
         class	NonDisplayableException : public std::exception
@@ -59,6 +61,7 @@ class Convert
 	};
 
         //Convert
+        
 
 
 
