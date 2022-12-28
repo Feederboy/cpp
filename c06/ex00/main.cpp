@@ -13,6 +13,7 @@ int main(int ac, char **av)
         c->aff_char();
         c->aff_int();
         c->aff_double();
+        c->aff_float();
         return 0;    
     }
 

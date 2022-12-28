@@ -81,13 +81,17 @@ float	Convert::get_float() const
 
 int     Convert::getType(std::string str) const
 {
+    const char *sstr = str.c_str();
+
     if ((str.length() == 1) &&
 		(std::isprint(static_cast<int>(str[0]))) &&
 		!(std::isdigit(static_cast<int>(str[0]))))
 	{
 		return (CHAR);
-	}  //POUR NAN ON RECUP UNE ERREUR
-    else if (strDigit(str)) //FAUT TROUVER NAN OU NANF OU INF UNIQUEMENT DANS STR POUR PAS RECUP UNE ERROR
+	}
+    else if (strDigit(str) || !strcmp(sstr, "nan") ||
+        !strcmp(sstr, "nanf") || !strcmp(sstr, "+inf") ||
+        !strcmp(sstr, "+inff") || !strcmp(sstr, "-inf") || !strcmp(sstr, "-inff"))
     {
 	    if ((str.find(".") != std::string::npos) ||
 			(str.find("nan") != std::string::npos) ||
@@ -165,6 +169,8 @@ void    Convert::aff_int()
     std::cout << "int: ";
     try
     {
+        if (isnan(this->d) || isinf(this->d) || isinff(this->d))
+            throw Convert::ImpossibleException();
         if (this->impossible)
             throw Convert::ImpossibleException();      
         this->i = static_cast<int>(this->d);
@@ -202,7 +208,22 @@ void    Convert::aff_double()
     {
         if (this->impossible)
             throw Convert::ImpossibleException();
-        std::cout << this->d << std::endl;
+        std::cout << std::setprecision(1) << std::fixed << this->d << '\n';
+    }           
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+}
+
+void    Convert::aff_float()
+{
+    std::cout << "float: ";
+    try
+    {
+        if (this->impossible)
+            throw Convert::ImpossibleException();
+        std::cout << std::setprecision(1) << std::fixed << this->d << "f\n";
     }           
     catch(const std::exception& e)
     {

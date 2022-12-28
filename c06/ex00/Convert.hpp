@@ -8,6 +8,7 @@
 # include <string.h>
 # include <stdlib.h>
 # include <limits>
+#  include <cmath>
 
 # define CHAR 1
 # define INT 2
@@ -66,6 +67,7 @@ class Convert
         void    aff_int();
         double  to_double(char *str);
         void    aff_double();
+        void    aff_float();
         
 
 
