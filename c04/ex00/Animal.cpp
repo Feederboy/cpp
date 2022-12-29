@@ -2,12 +2,12 @@
 
 Animal::Animal()
 {
-    std::cout << "default nimal comnstructor called" << std::endl;
+    std::cout << "default animal comnstructor called" << std::endl;
 }
 
 Animal::Animal(std::string type): type(type)
 {
-    std::cout << "Animal comnstructor called" << std::endl;
+    std::cout << "Animal constructor called" << std::endl;
 }
 
 Animal::Animal(Animal const &cpy):

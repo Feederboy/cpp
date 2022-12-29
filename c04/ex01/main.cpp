@@ -34,6 +34,14 @@ int		main()
 		delete tab[i];
 		std::cout << std::setw(30) << std::string(30, '-') << std::endl;
 	}
+	std::cout << std::endl;
+	std::cout << std::endl;
+	std::cout << std::endl;
+
+	Dog basic;
+	{
+		Dog tmp = basic;
+	}
 
 	return (0);
 }
