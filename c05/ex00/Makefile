@@ -1,29 +1,42 @@
-NAME			=	Brainz
+NAME=Bureaucrat
+
+CCXX=c++
+
+OBJDIR = obj
+
+CXXFLAGS=-Wall -Wextra -Werror -std=c++98
+
+PATHS= $(OBJDIR)/srcs
 
 SRC				=	main.cpp    \
 					Bureaucrat.cpp	\
-					
 
-OBJ				=	$(SRC: .cpp=.o)
+INCFLAGS=-I.
 
-FLAG			=	-Wall -Wextra -Werror -std=c++98
+RM=rm -rf
 
-CC				=	c++
+OBJ=$(SRC:%.cpp=$(OBJDIR)/%.o)
 
-all:	$(NAME)
+deps	:= $(patsubst %.o,%.d,$(OBJ))
+-include $(deps)
+DEPFLAGS = -MMD -MF $(@:.o=.d)
 
-.cpp.o:
-	$(CC) $(FLAG) $(SRC) -c $< -o $@
+$(OBJDIR)/%.o: %.cpp | $(OBJDIR)
+	$(CCXX) $(CXXFLAGS) $(INCFLAGS) -c $< $(DEPFLAGS) -o $@
 
-$(NAME):	$(OBJ)
-	$(CC) $(FLAG) $(OBJ) -o $(NAME)
+$(NAME): $(OBJ)
+	$(CCXX) $(CXXFLAGS) -o $@ $^
+
+$(OBJDIR) :
+	mkdir $(OBJDIR) $(PATHS)
+
+all: $(NAME)
 
 clean:
-	/bin/rm -rf *o
-
+	$(RM) $(OBJ) $(deps)
 fclean: clean
-	/bin/rm -rf $(NAME)
+	$(RM) $(NAME) $(OBJDIR)
 
 re: fclean all
 
-.PHONY: all clean fclean
+.PHONY: clean fclean

@@ -32,7 +32,6 @@ Bureaucrat const & Bureaucrat::operator=(Bureaucrat const &cpy)
 
     if (this != &cpy)
     {
-        this->_name = cpy._name;
         this->_grade = cpy._grade;
     }
     std::cout << "Bureaucrat copy comnstructor called" << std::endl;
@@ -99,3 +98,6 @@ void        Bureaucrat::executeForm(Form &form)
 	}
 	std::cout << *this << " executs " << form << std::endl;
 }
+
+const char* Bureaucrat::GradeTooLowException::what() const throw() { return ("Grade is too low."); }
+const char* Bureaucrat::GradeTooHighException::what() const throw() { return ("Grade is too high."); }

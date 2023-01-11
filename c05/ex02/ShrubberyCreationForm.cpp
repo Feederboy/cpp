@@ -99,3 +99,6 @@ void            ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 	}
 
 }
+
+const char* ShrubberyCreationForm::GradeTooLowException::what() const throw() { return ("Grade is too low."); }
+const char* ShrubberyCreationForm::GradeTooHighException::what() const throw() { return ("Grade is too high."); }

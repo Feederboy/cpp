@@ -90,3 +90,10 @@ bool            Form::canBeExecuted(Bureaucrat const &b, Form const &form)
 		return (true);
 	return false;
 }
+
+
+const char* Form::GradeTooLowException::what() const throw() { return ("Grade is too low."); }
+
+const char* Form::GradeTooHighException::what() const throw() { return ("Grade is too high."); }
+
+const char* Form::NotSignedException::what() const throw() { return ("Form is not signed !"); }

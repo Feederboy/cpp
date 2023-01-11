@@ -71,3 +71,12 @@ void            PresidentialPardonForm::execute(Bureaucrat const &executor) cons
 	}
 
 }
+
+Form *		PresidentialPardonForm::createForm(std::string target)
+{
+	return (new PresidentialPardonForm(target));
+}
+
+const char* PresidentialPardonForm::GradeTooLowException::what() const throw() { return ("Grade is too low."); }
+
+const char* PresidentialPardonForm::GradeTooHighException::what() const throw() { return ("Grade is too high."); }

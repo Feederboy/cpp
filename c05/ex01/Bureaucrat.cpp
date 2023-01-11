@@ -32,7 +32,6 @@ Bureaucrat const & Bureaucrat::operator=(Bureaucrat const &cpy)
 
     if (this != &cpy)
     {
-        this->_name = cpy._name;
         this->_grade = cpy._grade;
     }
     std::cout << "Bureaucrat copy comnstructor called" << std::endl;
@@ -76,11 +75,15 @@ void        Bureaucrat::signForm(Form &form)
     try
     {
         form.beSigned(*this);
+        std::cout << this->getName() << " signed form " << form.getName() << std::endl;
     }
     catch(const std::exception &e)
     {
         std::cerr << this->_name << " couldn't signed " << form.getName() << " cause " << e.what() << std::endl;
 		return ;
     }
-    std::cout << this->getName() << " signed form " << form.getName() << std::endl;
 }
+
+const char* Bureaucrat::GradeTooLowException::what() const throw() { return ("Grade is too low."); }
+
+const char* Bureaucrat::GradeTooHighException::what() const throw() { return ("Grade is too high."); }

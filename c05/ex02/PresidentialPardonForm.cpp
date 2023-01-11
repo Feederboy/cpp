@@ -69,5 +69,8 @@ void            PresidentialPardonForm::execute(Bureaucrat const &executor) cons
 	{
 		std::cout << this->_target << " has been pardoned by zaphrod bebleblblebrox" << std::endl;		
 	}
-
 }
+
+const char* PresidentialPardonForm::GradeTooLowException::what() const throw() { return ("Grade is too low."); }
+
+const char* PresidentialPardonForm::GradeTooHighException::what() const throw() { return ("Grade is too high."); }

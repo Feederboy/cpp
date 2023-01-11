@@ -74,10 +74,10 @@ int	main()
 	Form			*rf_2;
 	Form			*rf_3;
 	Form			*rf_4;
-	std::string		nameTest_1 = "robotomy test";
-	std::string		nameTest_2 = "presidential test";
-	std::string		nameTest_3 = "shrubbery test";
-	std::string		nameTest_4 = "shr test";
+	std::string		nameTest_1 = "robotomy request";
+	std::string		nameTest_2 = "presidential pardon";
+	std::string		nameTest_3 = "shrubbery creation";
+	std::string		nameTest_4 = "shr";
 	
 
 	
@@ -89,15 +89,15 @@ int	main()
 	rf_2 = randomOne.makeForm(nameTest_2, target4);
 	rf_3 = randomOne.makeForm(nameTest_3, target1);
 	rf_4 = randomOne.makeForm(nameTest_4, target2);
+	rf_4 = randomOne.makeForm("", target2);
 	std::cout << std::endl;
+
+	delete rf_1;
+	delete rf_2;
+	delete rf_3;
+	delete rf_4;
 	
-	std::cout << rf_1 << std::endl;
-	std::cout << std::endl;
-	std::cout << rf_2 << std::endl;
-	std::cout << std::endl;
-	std::cout << rf_3 << std::endl;
-	std::cout << std::endl;
-	std::cout << rf_4 << std::endl;
+
 	
 	return (0);
 }

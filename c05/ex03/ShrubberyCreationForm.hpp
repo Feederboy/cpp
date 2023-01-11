@@ -21,6 +21,7 @@ class ShrubberyCreationForm: public virtual Form
 		
 		//methods
 		void	execute(Bureaucrat const &executor) const;
+		Form * createForm(std::string target);
 		//functions
 		ShrubberyCreationForm	&beSigned(const Bureaucrat &b);
 		//getters
@@ -35,20 +36,14 @@ class ShrubberyCreationForm: public virtual Form
 	class	GradeTooHighException : public std::exception
 	{
 		public :
-			virtual const char	*what() const throw()
-			{
-				return ("Bureaucrat Grade too High !");
-			}
+			virtual const char	*what() const throw();
 	};
 
     
 	class	GradeTooLowException : public std::exception
 	{
 		public :
-			virtual const char	*what() const throw()
-			{
-				return ("Bureaucrat Grade too Low !");
-			}
+			virtual const char	*what() const throw();
 	};
 
 

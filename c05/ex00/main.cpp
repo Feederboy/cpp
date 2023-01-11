@@ -22,8 +22,8 @@ int main()
 		std::cout << "uprade : " << *p << std::endl;	
 		p->decrement();
 		std::cout << "downgrade : " << *p << std::endl;	
-		// p->decrement();
-		// std::cout << "downgrade : " << *p << std::endl;	
+		p->decrement();
+		std::cout << "downgrade : " << *p << std::endl;	
 	
 	}
 	catch (std::exception &e)

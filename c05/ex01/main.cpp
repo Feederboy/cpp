@@ -125,8 +125,28 @@ int	main()
 	///////////////////////////////////////////////////////////////
 
 	std::cout << "----END-----" << std::endl << std::endl;
+	std::cout << "----END-----" << std::endl << std::endl;
+	std::cout << "----END-----" << std::endl << std::endl;
+	std::cout << "----END-----" << std::endl << std::endl;
+	std::cout << "----END-----" << std::endl << std::endl;
+
 
 	std::cout << std::endl;
+
+	Bureaucrat		p("p", 150);
+	Form			pp("pp", 50, 20);
+
+std::cout << "Test for pp Form:" << std::endl;
+	try
+	{
+		p.signForm(pp);
+	}	
+	catch (const std::exception & e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+	std::cout << std::endl;
+
 
 	return (0);
 }

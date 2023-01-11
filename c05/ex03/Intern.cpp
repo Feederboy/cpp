@@ -2,56 +2,58 @@
 
 Intern::Intern()
 {
+	std::cout << "intern creation" << std::endl;
+	this->forms[0].name = "robotomy request";
+	this->forms[0].ptr = new RobotomyRequestForm("fodder");
+	this->forms[1].name = "shrubbery creation";
+	this->forms[1].ptr = new ShrubberyCreationForm("fodder");
+	this->forms[2].name = "presidential pardon";
+	this->forms[2].ptr = new PresidentialPardonForm("fodder");
 }
 
 Intern::~Intern()
 {
+	std::cout << "Intern destructor called" << std::endl;
+	int i = 0;
+	while (i < 3)
+	{
+		delete this->forms[i].ptr;
+		i++;
+	}
+	// delete[] forms;
 }
 
 Intern::Intern(Intern const &cpy)
 {
-    (void)cpy;
+	*this = cpy;
 }
 
 const Intern & Intern::operator=(const Intern &rhs)
 {
-    (void)rhs;
-    return (*this);
+	forms[0] = rhs.forms[0];
+	forms[1] = rhs.forms[1];
+	forms[2] = rhs.forms[2];
+	return *this;
 }
 
 Form*   Intern::makeForm(std::string name, std::string target)
 {
-    std::string tmp[3] = {"robotomy, shrubbery, presidential"};
     Form *res;
-    int i;
-
-    if (name.empty())
-        std::cout << "Not a valid name" << std::endl;
-
-    for (i = 0; i < 3; i++)
-    {
-        size_t		pos = name.find(tmp[i]);
-		if (pos != std::string::npos)
-			break;
-	}
-	switch (i)
-	{
-		case 0:
-			std::cout << "Intern create Form " << name << std::endl;
-			res = new RobotomyRequestForm(target);
-			break ;
-		case 1:
-			std::cout << "Intern create Form " << name << std::endl;
-			res = new ShrubberyCreationForm(target);
-			break;
-		case 2:
-			std::cout << "Intern create Form " << name << std::endl;
-			res = new PresidentialPardonForm(target);
-			break;
-		default:
-			std::cout << "Intern can't create Form" << name << std::endl;
-			res = NULL;
-			break;
-	}
+	res = NULL;
+	int i = 0;
+	
+		while (i < 3)
+		{
+			if (name == this->forms[i].name)
+			{
+				res = this->forms[i].ptr->createForm(target);
+				std::cout << "requested form [" << name << "] is created successfully" << std::endl;
+				return (res);
+			}
+			i++;
+		}
+		if (i == 3)
+			std::cout << "requested form [" << name << "] is unknown"
+				<< std::endl;
 	return (res);
 }

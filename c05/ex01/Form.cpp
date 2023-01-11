@@ -30,8 +30,6 @@ Form const & Form::operator=(Form const &cpy)
     if (this != &cpy)
     {
         this->_name = cpy._name;
-        // this->_grade_sign = cpy._grade_sign;
-        // this->_grade_ex = cpy._grade_ex;
     }
     std::cout << "Form copy comnstructor called" << std::endl;
     return (*this);
@@ -79,3 +77,7 @@ void        Form::beSigned(Bureaucrat &b)
     else
         throw Form::GradeTooLowException();
 }
+
+const char* Form::GradeTooLowException::what() const throw() { return ("Grade is too low."); }
+
+const char* Form::GradeTooHighException::what() const throw() { return ("Grade is too high."); }

@@ -15,7 +15,7 @@ private:
 public:
     Form();
     Form(std::string name, int gradesign, int gradeex);
-    ~Form();
+    virtual ~Form();
     Form(Form const &cpy);
     Form const &operator=(Form const &rhs);
         
@@ -27,34 +27,26 @@ public:
     void        beSigned(Bureaucrat &b);
     static bool        canBeExecuted(Bureaucrat const &b, Form const &form);
     virtual void    execute(Bureaucrat const &executor) const = 0;
+    virtual Form * createForm(std::string target) = 0;
 
 
     class GradeTooHighException: public std::exception
         {
             public:
-                virtual const char *what() const throw()
-                {
-                    return ("Grade too high");
-                }
+                virtual const char *what() const throw();
         };
 
 
     class GradeTooLowException: public std::exception
     {
         public:
-            virtual const char *what() const throw()
-            {
-                return ("Grade too low");
-            }
+            virtual const char *what() const throw();
     };
     
     class	NotSignedException : public std::exception
 	{
 		public :
-			virtual const char	*what() const throw()
-			{
-				return ("Form is not signed !");
-			}
+			virtual const char	*what() const throw();
 	};
 
 };

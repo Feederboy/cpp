@@ -76,3 +76,6 @@ void            RobotomyRequestForm::execute(Bureaucrat const &executor) const
 	}
 
 }
+
+const char* RobotomyRequestForm::GradeTooLowException::what() const throw() { return ("Grade is too low."); }
+const char* RobotomyRequestForm::GradeTooHighException::what() const throw() { return ("Grade is too high."); }
