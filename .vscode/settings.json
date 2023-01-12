@@ -70,6 +70,11 @@
         "ranges": "cpp",
         "complex": "cpp",
         "span": "cpp",
-        "cinttypes": "cpp"
+        "cinttypes": "cpp",
+        "cerrno": "cpp",
+        "cfloat": "cpp",
+        "climits": "cpp",
+        "queue": "cpp",
+        "stack": "cpp"
     }
 }
