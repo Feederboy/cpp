@@ -12,6 +12,8 @@ Convert::Convert(char *str) : tmp(str)
     impossible = false;
     this->type = this->getType(arg);
     std::cout << "type = " << this->type << std::endl;
+    std::cout << "tmp = " << tmp << std::endl;
+    std::cout << "atof(tmp) = " << std::atof(tmp) << std::endl;
     if (this->type == 1)
     {
         this->d = static_cast<double>(std::atof(tmp));
@@ -150,9 +152,15 @@ void    Convert::aff_char()
         if (this->impossible)
             throw Convert::ImpossibleException();            
         if (d <= std::numeric_limits<char>::max() && d >= std::numeric_limits<char>::min())
+        {
+            std::cout << "OUIIIIIIIIIIIIIII" << std::endl;
             this->c = static_cast<char>(this->d);
+        }
         else
-            throw Convert::ImpossibleException();            
+            throw Convert::ImpossibleException();
+        std::cout << "PRINTABLE = " << isprint(c) << std::endl;
+        std::cout << c << std::endl;
+
         if (std::isprint(c))
             std::cout << c << std::endl;
         else
