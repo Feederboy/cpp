@@ -16,6 +16,8 @@ Convert::Convert(char *str) : tmp(str)
     std::cout << "atof(tmp) = " << std::atof(tmp) << std::endl;
     if (this->type == 1)
     {
+        char *end;
+        this->d = std::strtod(tmp, &end); //USELESS AS FUCK
         this->d = static_cast<double>(std::atof(tmp));
     }
     else if (this->type == 2)
