@@ -4,6 +4,7 @@
 //construct
 Convert::Convert()
 {
+    this->tmp = NULL;
 }
 
 Convert::Convert(char *str) : tmp(str)
@@ -14,6 +15,7 @@ Convert::Convert(char *str) : tmp(str)
     impossible = false;
     int_impossible = false;
     this->type = this->getType(arg);
+    std::cout << "TYPE = " << this->type << std::endl;
     if (this->type == 1)
     {
         ttmp = tmp[0];
@@ -21,19 +23,24 @@ Convert::Convert(char *str) : tmp(str)
     }
     else if (this->type == 2)
     {
-
-        this->d = to_int(str);
+        this->d = static_cast<int>(std::atof(str));
     }
-        // this->d = static_cast<int>(std::atof(str));
     else if (this->type == 3)
         this->d = to_double(str);
     else if (this->type == 4)
     {
-        this->d = std::atof(str);
+        this->d = to_float(str);
+        // this->d = std::atof(str);
     }
     else if (this->type == 5)
+    {
         impossible = true;
-    else if (this->type == 6)
+    }
+    else if (this->type == 8)
+    {
+        this->d = to_float(str);
+    }
+    else if (this->type == 6 || this->type == 7)
     {
         int_impossible = true;
         this->d = to_double(str);
@@ -113,22 +120,23 @@ int     Convert::getType(std::string str) const
                 if (std::atof(str.c_str()) > std::numeric_limits<float>::max() 
                 || std::atof(str.c_str()) < std::numeric_limits<float>::min())
                 {
+                    std::cout << "ICI1" << std::endl;
                     return (ERROR);
                 }
 	    	    return (FLOAT);
 	    	}
 	    }
-            if (std::atof(str.c_str()) <= std::numeric_limits<double>::max() 
-                || std::atof(str.c_str()) >= std::numeric_limits<double>::min())
-                {
-                   if (std::atof(str.c_str()) > std::numeric_limits<int>::max() 
-        || std::atof(str.c_str()) < std::numeric_limits<int>::min())
+        if (std::atof(str.c_str()) <= std::numeric_limits<double>::max() 
+            || std::atof(str.c_str()) >= std::numeric_limits<double>::min())
+            {
+                if (std::atof(str.c_str()) > std::numeric_limits<int>::max() 
+                || std::atof(str.c_str()) < std::numeric_limits<int>::min())
                     {
                         return (ERROR_INT);
                     }
-                    return (DOUBLE);
-                }
-	            return (ERROR);
+                return (DOUBLE);
+            }
+	        return (ERROR_NAN);
     }
     return (ERROR);
 }
@@ -142,7 +150,10 @@ bool      Convert::strDigit(std::string str) const
     if (str[i] == '+' || str[i] == '-')
         i++;
     if (str[i] == '.')
+    {
+
         return false;
+    }
     while (str[i])
     {
         if (str[i] == '.' && !point)
@@ -191,18 +202,10 @@ void    Convert::aff_int()
     std::cout << "int: ";
     try
     {
-        // std::cout << "POINT 1" << std::endl;
-        // if (isnan(this->d) || isinf(this->d) || isinff(this->d))
-        // {
-        //     std::cout << "POINT 2" << std::endl;
-        //     throw Convert::ImpossibleException();
-        // }
-        if (this->int_impossible)
+        if (this->int_impossible || this->impossible)
         {
-            std::cout << "POINT 3" << std::endl;
             throw Convert::ImpossibleException();
         }      
-        std::cout << "POINT 4" << std::endl;
         this->i = static_cast<int>(this->d);
         std::cout << this->i << std::endl;
     }           
@@ -210,67 +213,6 @@ void    Convert::aff_int()
     {
         std::cerr << e.what() << '\n';
     }
-}
-
-int  Convert::to_int(char *str)
-{
-    if (!strcmp(str, "nan") || !strcmp(str, "nanf"))
-    {
-        this->d = std::numeric_limits<int>::quiet_NaN();
-    }
-    else if (!strcmp(str, "+inf") || !strcmp(str, "+inff"))
-    {
-        this->d = std::numeric_limits<int>::infinity();
-    }
-    else if (!strcmp(str, "inf") || !strcmp(str, "inff"))
-    {
-        this->d = std::numeric_limits<int>::infinity();
-    }
-    else if (!strcmp(str, "-inf") || !strcmp(str, "-inff"))
-    {
-        this->d = -std::numeric_limits<int>::infinity();
-    }
-    else if (!this->impossible)
-        this->d = static_cast<int>(atof(str));
-    return (this->d);
-}
-
-double  Convert::to_double(char *str)
-{
-    if (!strcmp(str, "nan") || !strcmp(str, "nanf"))
-    {
-        this->d = std::numeric_limits<double>::quiet_NaN();
-    }
-    else if (!strcmp(str, "+inf") || !strcmp(str, "+inff"))
-    {
-        this->d = std::numeric_limits<double>::infinity();
-    }
-    else if (!strcmp(str, "-inf") || !strcmp(str, "-inff"))
-    {
-        this->d = -std::numeric_limits<double>::infinity();
-    }
-    else if (!this->impossible)
-        this->d = static_cast<double>(atof(str));
-    return (this->d);
-}
-
-float  Convert::to_float(char *str)
-{
-    if (!strcmp(str, "nan") || !strcmp(str, "nanf"))
-    {
-        this->d = std::numeric_limits<double>::quiet_NaN();
-    }
-    else if (!strcmp(str, "+inf") || !strcmp(str, "+inff"))
-    {
-        this->d = std::numeric_limits<double>::infinity();
-    }
-    else if (!strcmp(str, "-inf") || !strcmp(str, "-inff"))
-    {
-        this->d = -std::numeric_limits<double>::infinity();
-    }
-    else if (!this->impossible)
-        this->d = static_cast<double>(atof(str));
-    return (this->d);
 }
 
 void    Convert::aff_double()
@@ -305,4 +247,45 @@ void    Convert::aff_float()
     {
         std::cerr << e.what() << '\n';
     }
+}
+
+double  Convert::to_double(char *str)
+{
+    if (!strcmp(str, "nan") || !strcmp(str, "nanf"))
+    {
+        this->d = std::numeric_limits<double>::quiet_NaN();
+    }
+    else if (!strcmp(str, "+inf") || !strcmp(str, "+inff"))
+    {
+        this->d = std::numeric_limits<double>::infinity();
+    }
+    else if (!strcmp(str, "-inf") || !strcmp(str, "-inff"))
+    {
+        std::cout << "TO_DOUBLE 1" << std::endl;
+        this->d = -std::numeric_limits<double>::infinity();
+    }
+    else if (!this->impossible)
+        this->d = static_cast<double>(atof(str));
+    return (this->d);
+}
+
+float  Convert::to_float(char *str)
+{
+    std::cout << "TO_FLOAT STR = " << str << std::endl;
+    if (!strcmp(str, "nan") || !strcmp(str, "nanf"))
+    {
+        this->d = std::numeric_limits<double>::quiet_NaN();
+    }
+    else if (!strcmp(str, "+inf") || !strcmp(str, "+inff"))
+    {
+        this->d = std::numeric_limits<double>::infinity();
+    }
+    else if (!strcmp(str, "-inf") || !strcmp(str, "-inff"))
+    {
+        std::cout << "TO_FLOAT 1" << std::endl;
+        this->d = -std::numeric_limits<double>::infinity();
+    }
+    else if (!this->impossible)
+        this->d = static_cast<double>(atof(str));
+    return (this->d);
 }

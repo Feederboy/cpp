@@ -16,6 +16,8 @@
 # define FLOAT 4
 # define ERROR 5
 # define ERROR_INT 6
+# define ERROR_NAN 7
+# define ERROR_INF 8
 
 class Convert
 {
@@ -67,7 +69,6 @@ class Convert
         //Convert
         void    aff_char();
         void    aff_int();
-        int     to_int(char *str);
         double  to_double(char *str);
         float  to_float(char *str);
         void    aff_double();
