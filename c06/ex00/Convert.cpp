@@ -15,7 +15,6 @@ Convert::Convert(char *str) : tmp(str)
     impossible = false;
     int_impossible = false;
     this->type = this->getType(arg);
-    std::cout << "TYPE = " << this->type << std::endl;
     if (this->type == 1)
     {
         ttmp = tmp[0];
@@ -30,7 +29,6 @@ Convert::Convert(char *str) : tmp(str)
     else if (this->type == 4)
     {
         this->d = to_float(str);
-        // this->d = std::atof(str);
     }
     else if (this->type == 5)
     {
@@ -38,6 +36,7 @@ Convert::Convert(char *str) : tmp(str)
     }
     else if (this->type == 8)
     {
+        int_impossible = true;
         this->d = to_float(str);
     }
     else if (this->type == 6 || this->type == 7)
@@ -120,8 +119,7 @@ int     Convert::getType(std::string str) const
                 if (std::atof(str.c_str()) > std::numeric_limits<float>::max() 
                 || std::atof(str.c_str()) < std::numeric_limits<float>::min())
                 {
-                    std::cout << "ICI1" << std::endl;
-                    return (ERROR);
+                    return (ERROR_INF);
                 }
 	    	    return (FLOAT);
 	    	}
@@ -261,7 +259,6 @@ double  Convert::to_double(char *str)
     }
     else if (!strcmp(str, "-inf") || !strcmp(str, "-inff"))
     {
-        std::cout << "TO_DOUBLE 1" << std::endl;
         this->d = -std::numeric_limits<double>::infinity();
     }
     else if (!this->impossible)
@@ -271,7 +268,6 @@ double  Convert::to_double(char *str)
 
 float  Convert::to_float(char *str)
 {
-    std::cout << "TO_FLOAT STR = " << str << std::endl;
     if (!strcmp(str, "nan") || !strcmp(str, "nanf"))
     {
         this->d = std::numeric_limits<double>::quiet_NaN();
@@ -282,7 +278,6 @@ float  Convert::to_float(char *str)
     }
     else if (!strcmp(str, "-inf") || !strcmp(str, "-inff"))
     {
-        std::cout << "TO_FLOAT 1" << std::endl;
         this->d = -std::numeric_limits<double>::infinity();
     }
     else if (!this->impossible)

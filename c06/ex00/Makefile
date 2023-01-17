@@ -1,4 +1,4 @@
-NAME			=	Brainz
+NAME			=	Convert
 
 SRC				=	main.cpp    \
 					Convert.cpp
