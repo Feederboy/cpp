@@ -12,8 +12,8 @@ int main(int ac, char **av)
         Convert *c = new Convert(av[1]);
         c->aff_char();
         c->aff_int();
-        c->aff_double();
         c->aff_float();
+        c->aff_double();
         return 0;    
     }
 

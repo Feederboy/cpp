@@ -66,6 +66,7 @@ class Convert
         void    aff_char();
         void    aff_int();
         double  to_double(char *str);
+        float  to_float(char *str);
         void    aff_double();
         void    aff_float();
         
