@@ -15,6 +15,7 @@
 # define DOUBLE 3
 # define FLOAT 4
 # define ERROR 5
+# define ERROR_INT 6
 
 class Convert
 {
@@ -26,6 +27,7 @@ class Convert
         char *tmp;
         int type;
         bool impossible;
+        bool int_impossible;
 
     public:
         //construct
@@ -65,6 +67,7 @@ class Convert
         //Convert
         void    aff_char();
         void    aff_int();
+        int     to_int(char *str);
         double  to_double(char *str);
         float  to_float(char *str);
         void    aff_double();

@@ -12,6 +12,7 @@ Convert::Convert(char *str) : tmp(str)
     ttmp = 0;
     std::string arg(tmp);
     impossible = false;
+    int_impossible = false;
     this->type = this->getType(arg);
     if (this->type == 1)
     {
@@ -19,17 +20,24 @@ Convert::Convert(char *str) : tmp(str)
         this->d = static_cast<double>(ttmp);
     }
     else if (this->type == 2)
-        this->d = static_cast<int>(std::atof(str));
+    {
+
+        this->d = to_int(str);
+    }
+        // this->d = static_cast<int>(std::atof(str));
     else if (this->type == 3)
         this->d = to_double(str);
     else if (this->type == 4)
     {
-        this->d = to_float(str);
-        // this->d = std::atof(str);
+        this->d = std::atof(str);
     }
     else if (this->type == 5)
         impossible = true;
-    std::cout << "TYpe = " << this->type << std::endl;
+    else if (this->type == 6)
+    {
+        int_impossible = true;
+        this->d = to_double(str);
+    }
     return ;
 }
 
@@ -102,20 +110,29 @@ int     Convert::getType(std::string str) const
 	    {
 		    if ((*(str.end() - 1) == 'f') && (*(str.end() - 2) != 'n'))
 		    {
-			    return (FLOAT);
+                if (std::atof(str.c_str()) > std::numeric_limits<float>::max() 
+                || std::atof(str.c_str()) < std::numeric_limits<float>::min())
+                {
+                    return (ERROR);
+                }
+	    	    return (FLOAT);
 	    	}
-		    return (DOUBLE);
 	    }
-        if (std::atof(str.c_str()) > std::numeric_limits<int>::max() 
+            if (std::atof(str.c_str()) <= std::numeric_limits<double>::max() 
+                || std::atof(str.c_str()) >= std::numeric_limits<double>::min())
+                {
+                   if (std::atof(str.c_str()) > std::numeric_limits<int>::max() 
         || std::atof(str.c_str()) < std::numeric_limits<int>::min())
-        {
-            std::cout << "NUMERIC LIMITS------------" << std::endl;
-            return (ERROR);
-        }
-	    return (INT);
+                    {
+                        return (ERROR_INT);
+                    }
+                    return (DOUBLE);
+                }
+	            return (ERROR);
     }
     return (ERROR);
 }
+
 
 bool      Convert::strDigit(std::string str) const
 {
@@ -174,10 +191,18 @@ void    Convert::aff_int()
     std::cout << "int: ";
     try
     {
-        if (isnan(this->d) || isinf(this->d) || isinff(this->d))
+        // std::cout << "POINT 1" << std::endl;
+        // if (isnan(this->d) || isinf(this->d) || isinff(this->d))
+        // {
+        //     std::cout << "POINT 2" << std::endl;
+        //     throw Convert::ImpossibleException();
+        // }
+        if (this->int_impossible)
+        {
+            std::cout << "POINT 3" << std::endl;
             throw Convert::ImpossibleException();
-        if (this->impossible)
-            throw Convert::ImpossibleException();      
+        }      
+        std::cout << "POINT 4" << std::endl;
         this->i = static_cast<int>(this->d);
         std::cout << this->i << std::endl;
     }           
@@ -185,6 +210,29 @@ void    Convert::aff_int()
     {
         std::cerr << e.what() << '\n';
     }
+}
+
+int  Convert::to_int(char *str)
+{
+    if (!strcmp(str, "nan") || !strcmp(str, "nanf"))
+    {
+        this->d = std::numeric_limits<int>::quiet_NaN();
+    }
+    else if (!strcmp(str, "+inf") || !strcmp(str, "+inff"))
+    {
+        this->d = std::numeric_limits<int>::infinity();
+    }
+    else if (!strcmp(str, "inf") || !strcmp(str, "inff"))
+    {
+        this->d = std::numeric_limits<int>::infinity();
+    }
+    else if (!strcmp(str, "-inf") || !strcmp(str, "-inff"))
+    {
+        this->d = -std::numeric_limits<int>::infinity();
+    }
+    else if (!this->impossible)
+        this->d = static_cast<int>(atof(str));
+    return (this->d);
 }
 
 double  Convert::to_double(char *str)
@@ -232,7 +280,6 @@ void    Convert::aff_double()
     {
         if (this->impossible)
         {
-            std::cout << "AFF DOUBLE IMPOSSIBLE" << std::endl;
             throw Convert::ImpossibleException();
         }
         std::cout << std::setprecision(1) << std::fixed << this->d << '\n';
@@ -250,8 +297,6 @@ void    Convert::aff_float()
     {
         if (this->impossible)
         {
-
-            std::cout << "AFF FLOAT IMPOSSIBLE" << std::endl;
             throw Convert::ImpossibleException();
         }
         std::cout << std::setprecision(1) << std::fixed << this->d << "f\n";
