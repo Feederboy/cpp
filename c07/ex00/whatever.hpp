@@ -24,4 +24,13 @@ void swap(T & a, T & b)
     b = t;
 }
 
+template<typename T>
+void swap2(T & a, T & b)
+{
+    T t;
+    t = a;
+    a = b;
+    b = t;
+}
+
 #endif
