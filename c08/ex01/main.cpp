@@ -1,7 +1,7 @@
 #include "Span.hpp"
 
-typedef		std::vector<int>::iterator	vector_it;
-typedef		std::vector<int>			t_vect;
+// typedef		std::vector<int>::iterator	vector_it;
+// typedef		std::vector<int>			t_vect;
 
 // int main()
 // {
@@ -56,18 +56,6 @@ typedef		std::vector<int>			t_vect;
 // 	{
 // 		tab_test.push_back(i);
 // 	}
-// 	vector_it			start_tab = tab_test.begin();
-// 	vector_it			end_tab  = tab_test.end();
-// 	try 
-// 	{
-// 		test_3.addNumbers(start_tab, end_tab);
-// 		std::cout << test_3;
-// 		std::cout << "test_3 DONE" << std::endl;
-// 	}
-// 	catch (std::exception const &e)
-// 	{
-// 		std::cerr << e.what() << std::endl;
-// 	}
 // 	std::cout << std::endl;
 
 // 	////////////////////////////////////////////////////////////////////////////////
@@ -104,58 +92,95 @@ typedef		std::vector<int>			t_vect;
 // }
 
 
-#define SIZE 10000
+// // #define SIZE 10000
 
-int generateNumber(void)
-{
-    return std::rand();
-}
+// // int generateNumber(void)
+// // {
+// //     return std::rand();
+// // }
 
-std::vector<int>    createRandomVector(unsigned int nb)
-{
-    std::vector<int>    tab(nb);
+// // std::vector<int>    createRandomVector(unsigned int nb)
+// // {
+// //     std::vector<int>    tab(nb);
 
-    std::generate(tab.begin(),tab.end(), generateNumber);
-    return tab;
-}
+// //     std::generate(tab.begin(),tab.end(), generateNumber);
+// //     return tab;
+// // }
 
-int main(void)
-{
-    try
-    {
-        // std::srand(std::time(NULL));
-        std::cout << "Subject's tests" << std::endl;
-        {	// Subject's tests
-            Span	sp(5);
-            Span	sp1(0);
-            Span	sp2(1);
+// // int main(void)
+// // {
+// //     try
+// //     {
+// //         // std::srand(std::time(NULL));
+// //         std::cout << "Subject's tests" << std::endl;
+// //         {	// Subject's tests
+// //             Span	sp(5);
+// //             Span	sp1(0);
+// //             Span	sp2(1);
 
-            sp2.addNumber(12);
+// //             sp2.addNumber(12);
 
-            sp.addNumber(20);
-            sp.addNumber(3);
-            sp.addNumber(17);
-            sp.addNumber(9);
-            sp.addNumber(21);
-            std::cout << "shortest : " << sp.shortestSpan() << std::endl;
-            std::cout << "longest : " << sp.longestSpan() << std::endl;
+// //             sp.addNumber(20);
+// //             sp.addNumber(3);
+// //             sp.addNumber(17);
+// //             sp.addNumber(9);
+// //             sp.addNumber(21);
+// //             std::cout << "shortest : " << sp.shortestSpan() << std::endl;
+// //             std::cout << "longest : " << sp.longestSpan() << std::endl;
             
-            std::cout << "longest : " << sp1.longestSpan() << std::endl;
-            std::cout << "longest : " << sp2.longestSpan() << std::endl;
-        }
-            std::cout << "My massive tests" << std::endl;
+// //             std::cout << "longest : " << sp1.longestSpan() << std::endl;
+// //             std::cout << "longest : " << sp2.longestSpan() << std::endl;
+// //         }
+// //             std::cout << "My massive tests" << std::endl;
 
-    }
-    catch (std::exception const &e)
-	{
-		std::cerr << e.what() << std::endl;
-	}
-	// {	// My massive tests
-    //     std::vector<int>    tabTmp(createRandomVector(SIZE));
-	// 	Span	            sp(tabTmp.begin(), tabTmp.end());
+// //     }
+// //     catch (std::exception const &e)
+// // 	{
+// // 		std::cerr << e.what() << std::endl;
+// // 	}
+// // 	// {	// My massive tests
+// //     //     std::vector<int>    tabTmp(createRandomVector(SIZE));
+// // 	// 	Span	            sp(tabTmp.begin(), tabTmp.end());
         
-	// 	std::cout << sp.shortestSpan() << std::endl;
-	// 	std::cout << sp.longestSpan() << std::endl;
-	// }
-    return 0;
+// // 	// 	std::cout << sp.shortestSpan() << std::endl;
+// // 	// 	std::cout << sp.longestSpan() << std::endl;
+// // 	// }
+// //     return 0;
+// // }
+
+
+
+
+ void	addToSpan(Span *sp)
+{	
+	std::vector<int> tab;
+    	std::vector<int>::iterator it;
+	int	size;
+	int	randSize = 20;
+	int	threshold = 500;
+
+	srand(time(NULL));
+	size = rand() % randSize;
+	for (int i = 0; i < size; i++)
+		tab.push_back(rand() % threshold - rand() % threshold);
+	for (it = tab.begin(); it != tab.end(); it++)
+		std::cout << *it << ", ";
+	std::cout << std::endl;
+	sp->addSpan(tab.begin(), tab.end());
+}
+
+int	main()
+{
+	Span	sp(10000);
+
+	addToSpan(&sp);
+	try
+	{	
+		std::cout << "shortest span : " << sp.shortestSpan() << std::endl;
+		std::cout << "longest span : " << sp.longestSpan() << std::endl;
+	}
+	catch (std::exception &e)
+	{
+		std::cout << e.what() << std::endl;
+	}
 }

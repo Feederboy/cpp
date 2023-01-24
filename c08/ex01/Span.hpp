@@ -21,8 +21,9 @@ class Span
         Span & operator=(Span const &rhs);
 
         void    addNumber(int n);
-        int shortestSpan() const;
-        int longestSpan() const;
+        void	addSpan(std::vector<int>::iterator begin, std::vector<int>::iterator end);
+        long shortestSpan() const;
+        long longestSpan() const;
 };
 
 class NoDistanceException: public std::exception

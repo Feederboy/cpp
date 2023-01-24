@@ -1,28 +1,44 @@
-NAME			=	Array
+_YELLOW		=	\033[38;5;184m
+_GREEN		=	\033[38;5;46m
+_RESET		=	\033[0m
+_INFO		=	[$(_YELLOW)INFO$(_RESET)]
+_SUCCESS	=	[$(_GREEN)SUCCESS$(_RESET)]
+_CLEAR		=	\033[2K\c
 
-SRC				=	main.cpp    \
-					
+NAME = Easyfind
+SRCS_DIR = ./
+SRCS = $(notdir $(shell find $(SRC_DIR) -type f -name "*.cpp"))
+HEADERS_DIR = ./
+HEADERS = $(notdir $(shell find $(SRC_DIR) -type f -name "*.hpp"))
 
-OBJ				=	$(SRC: .cpp=.o)
+FLAGS = -Wall -Wextra -Werror -std=c++98
 
-CXXFLAGS			=	-Wall -Wextra -Werror -std=c++98
+OBJS_DIR 	= 	objects/
+OBJ 		= 	$(SRCS:.cpp=.o)
+OBJS 		= 	$(addprefix $(OBJS_DIR), $(OBJ))
 
-CCXX				=	c++
+$(OBJS_DIR)%.o :	$(SRCS_DIR)%.cpp $(HEADERS)
+	@mkdir -p $(OBJS_DIR)
+	@echo "\t$(_YELLOW)Compiling$(_RESET) $*.cpp\r\c"
+	@clang++ $(FLAGS) -c $< -o $@
+	@echo "$(_CLEAR)"
 
-all:	$(NAME)
+all: $(NAME)
 
-.cpp.o:
-	$(CCXX) $(CXXFLAGS) $(SRC) -c $< -o $@
-
-$(NAME):	$(OBJ)
-	$(CCXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
+$(NAME): $(OBJS)
+	@echo "$(_INFO) Initialize $(NAME)"
+	@clang++ $(FLAGS) -o $(NAME) $(OBJS)
+	@echo "$(_SUCCESS) Compilation done"
 
 clean:
-	/bin/rm -rf *o
+	@echo "$(_INFO) Deleting object files and directories"
+	@rm -rf $(OBJS_DIR)
+	@echo "$(_SUCCESS) Working directory clean"
 
 fclean: clean
-	/bin/rm -rf $(NAME)
+	@echo "$(_INFO) $(NAME) has been deleted."
+	@rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean
+.PHONY:	all clean fclean re
