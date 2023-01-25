@@ -52,101 +52,59 @@ void	Span::addSpan(std::vector<int>::iterator begin, std::vector<int>::iterator 
 
 }
 
-// int     Span::shortestSpan() const
-// {
-//     if (this->_n == 0 || this->_n == 1)
-//         throw NoDistanceException();
-//     std::vector<int>::const_iterator it = this->_tab.begin();
-//     std::vector<int>::const_iterator ite = this->_tab.end();
-//     int tmp = *it;
-//     int minus = *it;
-//     int res = 0;
-
-
-//     std::cout << std::endl;
-//     for (; it != ite; ++it)
-//     {
-//         std::cout << *it << std::endl;
-//         if (*it > tmp)
-//         {
-//             tmp = *it;
-//         }
-//         if (*it > minus && *it < tmp)
-//         {
-//             minus = *it;
-//         }
-//     }
-//     std::cout << "max = " << tmp << "   min = " << minus << "    res = " << tmp - minus << std::endl;
-//     res = tmp - minus;
-//     return res;
-
-// }
-
-// int     Span::longestSpan() const
-// {
-//     if (this->_n == 0 || this->_n == 1)
-//         throw NoDistanceException();
-//     std::vector<int>::const_iterator it = this->_tab.begin();
-//     std::vector<int>::const_iterator ite = this->_tab.end();
-//     int tmp = *it;
-//     int minus = *it;
-//     int res = 0;
-    
-//     std::cout << std::endl;
-//     for (; it != ite; ++it)
-//     {
-//         std::cout << *it << std::endl;
-//         if (*it > tmp)
-//         {
-//             tmp = *it;
-//         }
-//         if (*it < minus)
-//         {
-//             minus = *it;
-//         }
-//     }
-//     std::cout << "max = " << tmp << "   min = " << minus << "    res = " << tmp - minus << std::endl;
-//     res = tmp - minus;
-//     return res;
-// }
-
-long		Span::longestSpan() const
+void	Span::printspan() const
 {
-    if (_tab.size() <= 1)
-    {
-        throw NoDistanceException();
-    }
-    long tmp1 = static_cast<long>(*std::max_element(_tab.begin(), _tab.end()));
-    long tmp2 = static_cast<long>(*std::min_element(_tab.begin(), _tab.end()));
-	return (tmp1 - tmp2);	
-}
+	std::vector<int>::const_iterator it = this->_tab.begin();
 
-long		Span::shortestSpan() const
-{
-	long 	lowest = -1;
-	long	span;
-    std::vector<int>::const_iterator it = _tab.begin();
-    std::vector<int>::const_iterator jt;
-
-    if (_tab.size() <= 1)
-    {
-        throw NoDistanceException();
-    }
-        std::cout << std::endl;
-
+	std::cout  << "[";
 	for (; it != _tab.end(); it++)
 	{
+		std::cout << *it << ", ";
+	}
+	std::cout  << "]";
+	std::cout << std::endl;
+
+}
+
+int     Span::shortestSpan() const
+{
+    if (_tab.size() <= 1)
+	{
+        throw NoDistanceException();
+	}
+    std::vector<int>::const_iterator it = this->_tab.begin();
+    std::vector<int>::const_iterator jt; 
+    int tmp;
+	int res = -1;
+
+    std::cout << std::endl;
+    for (; it != _tab.end(); ++it)
+    {
 		for (jt = it + 1; jt != _tab.end(); jt++)
 		{
 			if (*it > *jt)
-				span = static_cast<long>(*it) - static_cast<long>(*jt);
+				tmp = static_cast<int>(*it) - static_cast<int>(*jt);
 			else
-				span = static_cast<long>(*jt) - static_cast<long>(*it);
-			if (!span)
+				tmp = static_cast<int>(*jt) - static_cast<int>(*it);
+			if (!tmp)
 				return (0);
-			if (lowest > span || lowest < 0)
-				lowest = span;
+			if (res > tmp || res < 0)
+			{
+				res = tmp;
+			}
 		}
+    }
+    return (res);
+
+}
+
+int		Span::longestSpan() const
+{
+    if (_tab.size() <= 1)
+	{
+        throw NoDistanceException();
 	}
-	return (lowest);
+    int tmp1 = static_cast<int>(*std::max_element(_tab.begin(), _tab.end()));
+    int tmp2 = static_cast<int>(*std::min_element(_tab.begin(), _tab.end()));
+	return (tmp1 - tmp2);	
 }

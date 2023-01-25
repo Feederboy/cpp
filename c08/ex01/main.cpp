@@ -150,7 +150,6 @@
 
 
 
-
  void	addToSpan(Span *sp)
 {	
 	std::vector<int> tab;
@@ -174,6 +173,7 @@ int	main()
 	Span	sp(10000);
 
 	addToSpan(&sp);
+	
 	try
 	{	
 		std::cout << "shortest span : " << sp.shortestSpan() << std::endl;
@@ -184,3 +184,4 @@ int	main()
 		std::cout << e.what() << std::endl;
 	}
 }
+
