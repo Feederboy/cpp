@@ -1,20 +1,26 @@
-#include <RNP.hpp>
+#include "RPN.hpp"
 #include <iostream>
 
 int main(int ac, char **av)
 {
+    RPN rpn;
+
     if (ac != 2)
     {
-        std::cerr << "Usage: " << av[0] << "OPERATIONS";
-        return 1;
+        std::cerr << "Usage: " << av[0] << "RPN" << std::endl;
     }
-    try
+    else
     {
-        
-    }
-    catch(const std::exception& e)
-    {
-        std::cerr << e.what() << '\n';
+        try
+        {
+            rpn.reverse(av[1]);
+            std::cout << rpn << std::endl;
+        }
+        catch(const std::exception& e)
+        {
+            std::cerr << e.what() << '\n';
+        }
+
     }
     return 0;
     
